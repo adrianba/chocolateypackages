@@ -1,10 +1,8 @@
-$id     = "openra"
-$name   = "OpenRA"
-$kind   = "EXE"
-$silent = "/S"
-
 $tools  = Split-Path $MyInvocation.MyCommand.Definition
 
+. $tools\params.ps1
 . $tools\uninstall.ps1
 
-Uninstall-ChocolateyPackage -PackageName $id -FileType $kind -SilentArgs $silent -File (Get-Uninstaller -Name $name)
+$uninstaller = Get-Uninstaller -Name $name
+
+Uninstall-ChocolateyPackage -PackageName $id -FileType $kind -SilentArgs $silent -File $uninstaller
